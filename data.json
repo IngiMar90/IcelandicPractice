@@ -161,7 +161,7 @@
         "mey",
         "geysir",
         "teygjanlegur",
-        "seigja",
+        "peysa",
         "veisla",
         "leið",
         "heimur",
@@ -246,7 +246,7 @@
         "söngur",
         "langt",
         "stinga",
-        "anki",
+        "hanki",
         "ganga",
         "þungur",
         "lengi",
@@ -334,12 +334,12 @@
     "tvöfaldur samhljóði": {
       "Létt": [
         "köttur",
-        "palli",
+        "pallur",
         "sokkur",
         "mamma",
         "pabbi",
         "hattur",
-        "sigga",
+        "sigg",
         "hilla",
         "sunna",
         "kappi",
@@ -348,21 +348,21 @@
         "rokkur",
         "sinna",
         "dóttir",
-        "messi",
-        "krakki",
-        "bolli",
-        "sætta",
-        "villi",
-        "foss",
-        "hressa",
-        "kanna",
-        "sippa",
-        "drulla",
-        "gluggi",
-        "veggur",
-        "missa",
-        "koffort",
-        "lappa"
+        "gata",
+        "tala",
+        "matur",
+        "biti",
+        "sofa",
+        "koma",
+        "lesa",
+        "vika",
+        "rifa",
+        "hani",
+        "api",
+        "sami",
+        "hita",
+        "bátur",
+        "skata"
       ],
       "Miðlungs": [
         "kennari",
@@ -370,7 +370,7 @@
         "sammála",
         "lykkja",
         "upphaf",
-        "slyssa",
+        "slysstaður",
         "frétt",
         "drottning",
         "kapphlaup",
@@ -380,21 +380,21 @@
         "sammæli",
         "fullorðinn",
         "sáttasemjari",
-        "heppnast",
-        "skipuleggja",
-        "stytting",
-        "sammælast",
-        "tillaga",
-        "uppeldi",
-        "sanna",
-        "skemma",
-        "rekkja",
-        "vögguvísa",
-        "minnka",
-        "háttur",
-        "sóttkví",
-        "sammælis",
-        "sokka"
+        "leikari",
+        "vinátta",
+        "skólastofa",
+        "sumarið",
+        "ferðalag",
+        "opinn",
+        "nefið",
+        "vikan",
+        "tapið",
+        "falið",
+        "farið",
+        "hitaður",
+        "metið",
+        "rokið",
+        "heili"
       ],
       "Erfitt": [
         "samþykkt",
@@ -412,21 +412,21 @@
         "sannfærandi",
         "rekkjan",
         "uppsetning",
-        "starfsmenn",
-        "tillitssemi",
-        "vettvangur",
-        "frammistöðumat",
-        "samþætting",
-        "uppfærsla",
-        "fullnægjandi",
-        "heppni",
-        "náttmyrkur",
-        "styttast",
-        "uppgötvun",
-        "fulltrúi",
-        "sannleikur",
-        "vettvangsferð",
-        "tillitslaus"
+        "skipulag",
+        "samfélag",
+        "aðferð",
+        "tækifæri",
+        "mælikvarði",
+        "vísindamaður",
+        "hugmynd",
+        "samskipti",
+        "skilaboð",
+        "leiðari",
+        "skipulegur",
+        "hátalari",
+        "tónlist",
+        "viðhorf",
+        "umræða"
       ]
     }
   },
@@ -474,15 +474,15 @@
       ],
       [
         "góður",
-        "prúður"
+        "ágætur"
       ],
       [
         "bjartur",
         "ljós"
       ],
       [
-        "myrkur",
-        "dimmt"
+        "dimmur",
+        "myrkur"
       ],
       [
         "hlýr",
@@ -493,8 +493,8 @@
         "efnaður"
       ],
       [
-        "ungur",
-        "nýr"
+        "líflegur",
+        "fjörugur"
       ],
       [
         "gamall",
@@ -556,7 +556,7 @@
     "Miðlungs": [
       [
         "ákveðinn",
-        "einbeittur"
+        "staðfastur"
       ],
       [
         "hræddur",
@@ -616,7 +616,7 @@
       ],
       [
         "rótfestur",
-        "traustur"
+        "rótgróinn"
       ],
       [
         "óljós",
@@ -697,8 +697,8 @@
         "nýstárlegur"
       ],
       [
-        "gagnrýninn",
-        "athugull"
+        "gaumgæfilegur",
+        "vandlegur"
       ],
       [
         "samviskusamur",
@@ -710,7 +710,7 @@
       ],
       [
         "hlédrægur",
-        "látlaus"
+        "feiminn"
       ],
       [
         "beinskeyttur",
@@ -726,7 +726,7 @@
       ],
       [
         "margræður",
-        "fjölorður"
+        "margslunginn"
       ],
       [
         "vafasamur",
@@ -738,7 +738,7 @@
       ],
       [
         "stundvís",
-        "tímanlegur"
+        "tímanlega mættur"
       ],
       [
         "skynsamur",
@@ -758,11 +758,11 @@
       ],
       [
         "ósvikinn",
-        "hreinlyndur"
+        "ekta"
       ],
       [
         "markviss",
-        "miðaður"
+        "stefnufastur"
       ],
       [
         "næmur",
@@ -785,12 +785,12 @@
         "næmur"
       ],
       [
-        "úrlausnargóður",
-        "úrræðagóður"
+        "úrræðagóður",
+        "ráðagóður"
       ],
       [
-        "skýrskotandi",
-        "beinskeyttur"
+        "margorður",
+        "fjölorður"
       ],
       [
         "fjarstæður",
@@ -826,7 +826,7 @@
       ],
       [
         "bjartur",
-        "dim­mur"
+        "dimmur"
       ],
       [
         "langur",
@@ -1142,11 +1142,11 @@
       ],
       [
         "tímanlegur",
-        "seinlegur"
+        "ótímabær"
       ],
       [
-        "miðaður",
-        "tilviljanakenndur"
+        "skipulagður",
+        "óskipulagður"
       ],
       [
         "óhræddur",
@@ -1577,84 +1577,84 @@
         "nafnorð"
       ],
       [
-        "matur",
-        "nafnorð"
-      ],
-      [
-        "gluggi",
-        "nafnorð"
-      ],
-      [
-        "penni",
-        "nafnorð"
-      ],
-      [
-        "dagur",
-        "nafnorð"
-      ],
-      [
-        "nótt",
-        "nafnorð"
-      ],
-      [
-        "hlaupa",
+        "að hlaupa",
         "sagnorð"
       ],
       [
-        "borða",
+        "að borða",
         "sagnorð"
       ],
       [
-        "sofa",
+        "að sofa",
         "sagnorð"
       ],
       [
-        "skrifa",
+        "að skrifa",
         "sagnorð"
       ],
       [
-        "syngja",
+        "að syngja",
         "sagnorð"
       ],
       [
-        "hoppa",
+        "að hoppa",
         "sagnorð"
       ],
       [
-        "fara",
+        "að fara",
         "sagnorð"
       ],
       [
-        "lesa",
+        "að lesa",
         "sagnorð"
       ],
       [
-        "sitja",
+        "að sitja",
         "sagnorð"
       ],
       [
-        "standa",
+        "að standa",
         "sagnorð"
       ],
       [
-        "hlæja",
-        "sagnorð"
+        "glaður",
+        "lýsingarorð"
       ],
       [
-        "teikna",
-        "sagnorð"
+        "stór",
+        "lýsingarorð"
       ],
       [
-        "opna",
-        "sagnorð"
+        "lítill",
+        "lýsingarorð"
       ],
       [
-        "loka",
-        "sagnorð"
+        "fallegur",
+        "lýsingarorð"
       ],
       [
-        "spila",
-        "sagnorð"
+        "hraður",
+        "lýsingarorð"
+      ],
+      [
+        "kaldur",
+        "lýsingarorð"
+      ],
+      [
+        "heitur",
+        "lýsingarorð"
+      ],
+      [
+        "rauður",
+        "lýsingarorð"
+      ],
+      [
+        "mjúkur",
+        "lýsingarorð"
+      ],
+      [
+        "sterkur",
+        "lýsingarorð"
       ]
     ],
     "Miðlungs": [
@@ -1699,84 +1699,84 @@
         "nafnorð"
       ],
       [
-        "niðurstaða",
-        "nafnorð"
-      ],
-      [
-        "upplýsing",
-        "nafnorð"
-      ],
-      [
-        "viðtal",
-        "nafnorð"
-      ],
-      [
-        "regla",
-        "nafnorð"
-      ],
-      [
-        "framför",
-        "nafnorð"
-      ],
-      [
-        "ákveða",
+        "að ákveða",
         "sagnorð"
       ],
       [
-        "virða",
+        "að virða",
         "sagnorð"
       ],
       [
-        "leiðbeina",
+        "að leiðbeina",
         "sagnorð"
       ],
       [
-        "meta",
+        "að meta",
         "sagnorð"
       ],
       [
-        "útskýra",
+        "að útskýra",
         "sagnorð"
       ],
       [
-        "athuga",
+        "að athuga",
         "sagnorð"
       ],
       [
-        "velja",
+        "að velja",
         "sagnorð"
       ],
       [
-        "bera",
+        "að bera",
         "sagnorð"
       ],
       [
-        "styðja",
+        "að styðja",
         "sagnorð"
       ],
       [
-        "skipuleggja",
+        "að skipuleggja",
         "sagnorð"
       ],
       [
-        "skoða",
-        "sagnorð"
+        "hugrakkur",
+        "lýsingarorð"
       ],
       [
-        "sannfæra",
-        "sagnorð"
+        "varkár",
+        "lýsingarorð"
       ],
       [
-        "greina",
-        "sagnorð"
+        "heiðarlegur",
+        "lýsingarorð"
       ],
       [
-        "ræða",
-        "sagnorð"
+        "örlátur",
+        "lýsingarorð"
       ],
       [
-        "safna",
-        "sagnorð"
+        "kurteis",
+        "lýsingarorð"
+      ],
+      [
+        "þolinmóður",
+        "lýsingarorð"
+      ],
+      [
+        "vandvirkur",
+        "lýsingarorð"
+      ],
+      [
+        "áhugasamur",
+        "lýsingarorð"
+      ],
+      [
+        "sanngjarn",
+        "lýsingarorð"
+      ],
+      [
+        "nákvæmur",
+        "lýsingarorð"
       ]
     ],
     "Erfitt": [
@@ -1821,71 +1821,43 @@
         "nafnorð"
       ],
       [
-        "samviska",
-        "nafnorð"
-      ],
-      [
-        "aðlögun",
-        "nafnorð"
-      ],
-      [
-        "raunsæi",
-        "nafnorð"
-      ],
-      [
-        "hlutlægni",
-        "nafnorð"
-      ],
-      [
-        "úrræðagæði",
-        "nafnorð"
-      ],
-      [
-        "aðlaga",
+        "að aðlaga",
         "sagnorð"
       ],
       [
-        "rýna",
+        "að rýna",
         "sagnorð"
       ],
       [
-        "endurskoða",
+        "að endurskoða",
         "sagnorð"
       ],
       [
-        "rökstyðja",
+        "að rökstyðja",
         "sagnorð"
       ],
       [
-        "íhuga",
+        "að íhuga",
         "sagnorð"
       ],
       [
-        "túlka",
+        "að túlka",
         "sagnorð"
       ],
       [
-        "samræma",
+        "að samræma",
         "sagnorð"
       ],
       [
-        "varðveita",
+        "að varðveita",
         "sagnorð"
       ],
       [
-        "móta",
+        "að móta",
         "sagnorð"
       ],
       [
-        "draga",
-        "sagnorð"
-      ],
-      [
-        "skýra",
-        "sagnorð"
-      ],
-      [
-        "samhæfa",
+        "að draga",
         "sagnorð"
       ],
       [
@@ -1898,6 +1870,34 @@
       ],
       [
         "aðlögunarhæfur",
+        "lýsingarorð"
+      ],
+      [
+        "samviskusamur",
+        "lýsingarorð"
+      ],
+      [
+        "beinskeyttur",
+        "lýsingarorð"
+      ],
+      [
+        "markviss",
+        "lýsingarorð"
+      ],
+      [
+        "athugull",
+        "lýsingarorð"
+      ],
+      [
+        "úrræðagóður",
+        "lýsingarorð"
+      ],
+      [
+        "rökfastur",
+        "lýsingarorð"
+      ],
+      [
+        "hógvær",
         "lýsingarorð"
       ]
     ]
@@ -2254,7 +2254,7 @@
       ],
       [
         "rýni",
-        "hvorugkyn"
+        "kvenkyn"
       ],
       [
         "siðferði",
@@ -2289,7 +2289,7 @@
         "fleirtala"
       ],
       [
-        "hús",
+        "eitt hús",
         "eintala"
       ],
       [
@@ -2313,7 +2313,7 @@
         "eintala"
       ],
       [
-        "tré",
+        "eitt tré",
         "eintala"
       ],
       [
@@ -2321,7 +2321,7 @@
         "fleirtala"
       ],
       [
-        "skór",
+        "einn skór",
         "eintala"
       ],
       [
@@ -2353,7 +2353,7 @@
         "fleirtala"
       ],
       [
-        "borð",
+        "eitt borð",
         "eintala"
       ],
       [
@@ -2385,7 +2385,7 @@
         "fleirtala"
       ],
       [
-        "blóm",
+        "eitt blóm",
         "eintala"
       ],
       [
@@ -2395,7 +2395,7 @@
     ],
     "Miðlungs": [
       [
-        "verkefni",
+        "eitt verkefni",
         "eintala"
       ],
       [
@@ -2463,7 +2463,7 @@
         "fleirtala"
       ],
       [
-        "dæmi",
+        "eitt dæmi",
         "eintala"
       ],
       [
@@ -2507,7 +2507,7 @@
         "fleirtala"
       ],
       [
-        "mál",
+        "eitt mál",
         "eintala"
       ],
       [
@@ -2517,7 +2517,7 @@
     ],
     "Erfitt": [
       [
-        "sjónarmið",
+        "eitt sjónarmið",
         "eintala"
       ],
       [
@@ -2525,7 +2525,7 @@
         "fleirtala"
       ],
       [
-        "viðhorf",
+        "eitt viðhorf",
         "eintala"
       ],
       [
@@ -2569,7 +2569,7 @@
         "fleirtala"
       ],
       [
-        "frávik",
+        "eitt frávik",
         "eintala"
       ],
       [
@@ -2577,23 +2577,23 @@
         "fleirtala"
       ],
       [
-        "úrvinnsla",
+        "ein niðurstaða",
         "eintala"
       ],
       [
-        "úrvinnslur",
+        "margar niðurstöður",
         "fleirtala"
       ],
       [
-        "fyrirkomulag",
+        "eitt skipulag",
         "eintala"
       ],
       [
-        "fyrirkomulög",
+        "mörg skipulög",
         "fleirtala"
       ],
       [
-        "samhengi",
+        "eitt samhengi",
         "eintala"
       ],
       [
@@ -2601,11 +2601,11 @@
         "fleirtala"
       ],
       [
-        "sjálfstæði",
+        "einn möguleiki",
         "eintala"
       ],
       [
-        "sjálfstæðin",
+        "margir möguleikar",
         "fleirtala"
       ],
       [
@@ -2633,7 +2633,7 @@
         "fleirtala"
       ],
       [
-        "grunnvöllur",
+        "grundvöllur",
         "eintala"
       ]
     ]
@@ -3009,7 +3009,7 @@
   "CASE_DATA": {
     "Létt": [
       [
-        "hundur",
+        "hér er hundur",
         "nefnifall"
       ],
       [
@@ -3025,7 +3025,7 @@
         "eignarfall"
       ],
       [
-        "bók",
+        "hér er bók",
         "nefnifall"
       ],
       [
@@ -3041,7 +3041,7 @@
         "eignarfall"
       ],
       [
-        "hús",
+        "hér er hús",
         "nefnifall"
       ],
       [
@@ -3057,7 +3057,7 @@
         "eignarfall"
       ],
       [
-        "kisa",
+        "hér er kisa",
         "nefnifall"
       ],
       [
@@ -3073,7 +3073,7 @@
         "eignarfall"
       ],
       [
-        "drengur",
+        "hér er drengur",
         "nefnifall"
       ],
       [
@@ -3089,7 +3089,7 @@
         "eignarfall"
       ],
       [
-        "pera",
+        "hér er pera",
         "nefnifall"
       ],
       [
@@ -3105,7 +3105,7 @@
         "eignarfall"
       ],
       [
-        "stóll",
+        "hér er stóll",
         "nefnifall"
       ],
       [
@@ -3121,7 +3121,7 @@
         "eignarfall"
       ],
       [
-        "tré",
+        "hér er tré",
         "nefnifall"
       ],
       [
@@ -3131,7 +3131,7 @@
     ],
     "Miðlungs": [
       [
-        "nemandi",
+        "hér er nemandi",
         "nefnifall"
       ],
       [
@@ -3147,7 +3147,7 @@
         "eignarfall"
       ],
       [
-        "ákvörðun",
+        "hér er ákvörðun",
         "nefnifall"
       ],
       [
@@ -3163,7 +3163,7 @@
         "eignarfall"
       ],
       [
-        "verkefni",
+        "hér er verkefni",
         "nefnifall"
       ],
       [
@@ -3179,7 +3179,7 @@
         "eignarfall"
       ],
       [
-        "leiðangur",
+        "hér er leiðangur",
         "nefnifall"
       ],
       [
@@ -3195,7 +3195,7 @@
         "eignarfall"
       ],
       [
-        "virðing",
+        "hér er virðing",
         "nefnifall"
       ],
       [
@@ -3211,7 +3211,7 @@
         "eignarfall"
       ],
       [
-        "markmið",
+        "hér er markmið",
         "nefnifall"
       ],
       [
@@ -3227,7 +3227,7 @@
         "eignarfall"
       ],
       [
-        "spurning",
+        "hér er spurning",
         "nefnifall"
       ],
       [
@@ -3243,7 +3243,7 @@
         "eignarfall"
       ],
       [
-        "regla",
+        "hér er regla",
         "nefnifall"
       ],
       [
@@ -3253,7 +3253,7 @@
     ],
     "Erfitt": [
       [
-        "sjónarmið",
+        "hér er sjónarmið",
         "nefnifall"
       ],
       [
@@ -3269,7 +3269,7 @@
         "eignarfall"
       ],
       [
-        "samhengi",
+        "hér er samhengi",
         "nefnifall"
       ],
       [
@@ -3285,7 +3285,7 @@
         "eignarfall"
       ],
       [
-        "hugmynd",
+        "hér er hugmynd",
         "nefnifall"
       ],
       [
@@ -3301,7 +3301,7 @@
         "eignarfall"
       ],
       [
-        "málflutningur",
+        "hér er málflutningur",
         "nefnifall"
       ],
       [
@@ -3317,7 +3317,7 @@
         "eignarfall"
       ],
       [
-        "aðlögun",
+        "hér er aðlögun",
         "nefnifall"
       ],
       [
@@ -3333,7 +3333,7 @@
         "eignarfall"
       ],
       [
-        "sjálfstæði",
+        "hér er sjálfstæði",
         "nefnifall"
       ],
       [
@@ -3349,7 +3349,7 @@
         "eignarfall"
       ],
       [
-        "viðhorf",
+        "hér er viðhorf",
         "nefnifall"
       ],
       [
@@ -3365,7 +3365,7 @@
         "eignarfall"
       ],
       [
-        "forsenda",
+        "hér er forsenda",
         "nefnifall"
       ],
       [
@@ -3373,5 +3373,205 @@
         "þolfall"
       ]
     ]
+  },
+  "SPELLING_CONTEXTS": {
+    "hitta": "Ég ætla að {word} vin minn.",
+    "vinur": "Hann er góður {word} minn.",
+    "systir": "Ég á bróður og {word}.",
+    "lykill": "Ég opna dyrnar. Hér er {word} að hurðinni.",
+    "mynd": "Ég tek {word} með myndavél.",
+    "fyrsti": "Hver vann? Sá {word} fékk gull.",
+    "til": "Ég fer {word} ömmu.",
+    "yfir": "Við göngum {word} brúna.",
+    "fiskur": "Það er {word} á önglinum.",
+    "skip": "Stórt {word} siglir á sjónum.",
+    "silfur": "Hringurinn er úr gulli og {word}.",
+    "lyfta": "Ég ætla að {word} þungum kassa.",
+    "hilla": "Bækurnar eru uppi. Þarna er {word}.",
+    "lygi": "Þetta er ekki satt. Þetta er {word}.",
+    "miði": "Ég þarf að kaupa aðgang. Hér er {word} í bíó.",
+    "myrkur": "Það er ekkert ljós. Hér er {word}.",
+    "lyndur": "Hann er glaður í dag. Hann er vel {word}.",
+    "bylgja": "Það kemur stór {word} á sjónum.",
+    "ýta": "Hurðin opnast inn. Ég þarf að {word} henni.",
+    "ský": "Á himninum er hvítt {word}.",
+    "fyrir": "Ég baka köku {word} þig.",
+    "kyn": "Karlkyn og kvenkyn eru dæmi um {word} orða.",
+    "mylla": "Vindurinn snýr spöðunum. Þetta er {word}.",
+    "fylgja": "Ég ætla að {word} þér heim.",
+    "sykur": "Ég set sætuefni í kökuna. Það er {word}.",
+    "vika": "Sjö dagar eru ein {word}.",
+    "rifa": "Það er smátt op á blaðinu. Þetta er {word} í því.",
+    "lítill": "Hann er ekki stór. Hann er {word}.",
+    "girðing": "Í kringum túnið er {word}.",
+    "mismunur": "Fimm mínus þrír eru tveir. Tveir er {word} talnanna.",
+    "kynning": "Við segjum frá verkefninu. Þetta er {word} á því.",
+    "fyrirmynd": "Hún er góð {word} fyrir aðra.",
+    "virðing": "Við sýnum hvert öðru {word}.",
+    "skýring": "Ég skil þetta ekki. Ég þarf betri {word}.",
+    "lýsing": "Textinn segir hvernig staðurinn lítur út. Þetta er {word} á honum.",
+    "siður": "Þetta er gömul venja. Þetta er gamall {word}.",
+    "vísindi": "Í efnafræði lærum við um {word}.",
+    "fyrirvara": "Miðana þarf að panta með góðum {word}.",
+    "mynstur": "Litirnir endurtaka sig. Þetta er fallegt {word}.",
+    "yndislegur": "Þetta var frábær dagur. Hann var {word}.",
+    "fylgni": "Þegar annað eykst, eykst hitt líka. Það er {word} milli þeirra.",
+    "birting": "Textinn verður opinber á morgun. Þá fer fram {word} hans.",
+    "viðmið": "Við þurfum reglu til að bera þetta saman. Við veljum skýrt {word}.",
+    "síðari": "Fyrri hluti er búinn. Nú byrjar {word} hlutinn.",
+    "skýli": "Við förum í {word} fyrir rigningunni.",
+    "fyrirhöfn": "Verkið kostaði mikla vinnu og {word}.",
+    "lyfjabúð": "Ég sæki lyfin mín í apótek. Þetta er {word}.",
+    "viðtal": "Blaðamaðurinn tekur {word} við kennarann.",
+    "myndarlegur": "Hann er vel til fara og {word}.",
+    "vísbending": "Leynilögreglan fann spor. Það er mikilvæg {word}.",
+    "siðvenja": "Þetta er venja í samfélaginu. Þetta er {word}.",
+    "lyklaborð": "Ég nota {word} til að skrifa á tölvu.",
+    "fyrirlesari": "Hann flytur fyrirlestur. Hann er {word}.",
+    "myrkvun": "Öll ljós slokknuðu. Það varð {word}.",
+    "kylfa": "Ég slæ golfbolta með {word}.",
+    "dýrmætur": "Hringurinn kostar mikið. Hann er {word}.",
+    "viðurkenning": "Hún fær verðlaun fyrir verkið. Það er {word} fyrir vinnuna.",
+    "fyrirlestur": "Kennarinn heldur {word} um sögu landsins.",
+    "vísitala": "Verðbreytingar eru mældar með tölu. Sú tala kallast {word}.",
+    "ylur": "Frá ofninum kemur þægilegur {word}.",
+    "fyrirhyggja": "Hann skipuleggur fram í tímann. Það er góð {word}.",
+    "viðurkenndur": "Allir samþykktu sigurinn. Hann var {word}.",
+    "siðferðilegur": "Þetta snýst um rétt og rangt. Vandinn er {word}.",
+    "skýringarmynd": "Myndin sýnir hvernig vélin virkar. Þetta er {word}.",
+    "myndlistarmaður": "Hann málar og teiknar. Hann er {word}.",
+    "vísindalegur": "Rannsóknin fylgir aðferðum vísinda. Textinn er {word}.",
+    "fyrirkomulag": "Svona verður starfinu háttað. Þetta er nýtt {word}.",
+    "lyfjafræðingur": "Sérfræðingurinn í apótekinu er {word}.",
+    "myrkvunarviðvörun": "Það verður slökkt á rafmagninu. Við fengum {word}.",
+    "viðskipti": "Kaup og sala eru {word}.",
+    "sýnilegur": "Við sjáum turninn vel. Hann er {word}.",
+    "fyrirbyggjandi": "Við reynum að koma í veg fyrir slys. Búnaðurinn er {word}.",
+    "vísindaritgerð": "Ritgerðin fjallar um rannsókn. Hún er {word}.",
+    "myndbirting": "Ljósmyndin kemur í blaðinu. Þetta er {word}.",
+    "siðvenjur": "Venjur í samfélaginu kallast {word}.",
+    "lýðræði": "Fólkið kýs fulltrúa sína. Þetta kallast {word}.",
+    "yfirlýsing": "Hún segir opinberlega frá ákvörðuninni. Þetta er {word}.",
+    "nýjung": "Enginn hefur séð þetta áður. Þetta er {word}.",
+    "kynjafræði": "Greinin fjallar um kyn og samfélag. Hún kallast {word}.",
+    "viðmiðun": "Við berum niðurstöðuna saman við fyrri mælingu. Hún er okkar {word}.",
+    "dýravernd": "Við vinnum að velferð dýra. Það er {word}.",
+    "fyrirhyggjulaus": "Hann hugsar aldrei fram í tímann. Hann er {word}.",
+    "skýjafar": "Það eru fá ský á himni. Í dag er lítið {word}.",
+    "viðurkenningarorð": "Kennarinn hrósar nemandanum. Hún fær {word}.",
+    "þýðingarmikill": "Dagurinn skiptir miklu máli. Hann er {word}.",
+    "samviskubit": "Mér líður illa yfir því sem ég gerði. Ég fæ {word}.",
+    "fyrirlestrarsalur": "Í þessum sal eru haldnir fyrirlestrar. Hann er {word}.",
+    "vísindamiðstöð": "Þar vinna vísindamenn. Húsið er {word}.",
+    "myndgreining": "Læknirinn skoðar myndir af líkamanum. Þetta er {word}.",
+    "viðurkenningarbréf": "Hún fékk bréf sem staðfestir góðan árangur. Það er {word}.",
+    "hattur": "Ég set höfuðfat á höfuðið. Það heitir {word}.",
+    "köttur": "Dýrið mjálmar. Þetta er {word}.",
+    "pallur": "Við sitjum á veröndinni. Hér er stór {word}.",
+    "sokkur": "Ég klæði mig í sokka. Hér er einn {word}.",
+    "mamma": "Foreldrar mínir eru pabbi og {word}.",
+    "pabbi": "Foreldrar mínir eru mamma og {word}.",
+    "sigg": "Húðin er hörð eftir vinnuna. Ég er með {word} í lófanum.",
+    "sunna": "Sólin skín. Gamalt orð yfir sól er {word}.",
+    "kappi": "Hann er hugrakkur bardagamaður. Hann er mikill {word}.",
+    "steinn": "Ég fann harðan hlut á jörðinni. Þetta er {word}.",
+    "falla": "Laufblöðin {word} af trjánum.",
+    "sinna": "Ég þarf að {word} verkefninu mínu.",
+    "dóttir": "Foreldrarnir eiga son og {word}.",
+    "sammæli": "Allir voru sammála. Það var {word} um niðurstöðuna.",
+    "heppinn": "Ég vann í happdrættinu. Ég var {word}.",
+    "rekkjan": "Hann lagðist í rúmið. Mjúka {word} var tilbúin.",
+    "tilkynnt": "Fréttin var sögð opinberlega. Málið var {word}.",
+    "frammistaða": "Hún stóð sig vel í leiknum. Þetta var góð {word}.",
+    "gata": "Ég geng eftir götunni. Þetta er löng {word}.",
+    "tala": "Ég ætla að {word} við vin minn.",
+    "matur": "Ég er svangur. Á borðinu er {word}.",
+    "biti": "Ég fæ lítinn hluta af kökunni. Það er einn {word}.",
+    "sofa": "Ég er þreyttur og ætla að {word}.",
+    "koma": "Viltu {word} í heimsókn?",
+    "lesa": "Ég ætla að {word} bók.",
+    "hani": "Hænan og haninn búa í kofanum. Þetta er {word}.",
+    "api": "Dýrið klifrar í trjám. Þetta er {word}.",
+    "sami": "Þetta er ekki annar bíll. Þetta er {word} bíll.",
+    "hita": "Súpan er köld. Ég þarf að {word} hana.",
+    "bátur": "Við róum á sjónum. Þetta er lítill {word}.",
+    "skata": "Fiskurinn er flatur. Þetta er {word}.",
+    "leikari": "Hann leikur í kvikmyndum. Hann er {word}.",
+    "vinátta": "Við erum góðir vinir. Okkar á milli er sterk {word}.",
+    "skólastofa": "Hér fara kennslustundirnar fram. Þetta er {word}.",
+    "sumarið": "Árstíðin á eftir vorinu er {word}.",
+    "ferðalag": "Við ætlum að heimsækja annað land. Við förum í {word}.",
+    "opinn": "Glugginn er ekki lokaður. Hann er {word}.",
+    "nefið": "Ég finn lykt með nefinu. Þetta er {word}.",
+    "vikan": "Mánudagur til sunnudags er ein vika. Nú er {word} liðin.",
+    "tapið": "Liðið tapaði leiknum. Það var leiðinlegt að sjá {word}.",
+    "falið": "Enginn sá leikfangið. Það var {word} undir rúmi.",
+    "farið": "Þið megið ekki vera lengur. Þið getið {word} heim.",
+    "hitaður": "Ofninn var kaldur en svo var hann {word}.",
+    "metið": "Kennarinn skoðaði verkefnið. Það var {word} til einkunnar.",
+    "rokið": "Það blés mjög mikið. Tréð bognaði í vindinum. Þetta var mikið rok. Nú er {word} búið.",
+    "heili": "Líffærið í höfðinu kallast {word}.",
+    "skipulag": "Við setjum verkefnin í röð. Þetta er gott {word}.",
+    "samfélag": "Fólk býr saman og fylgir sameiginlegum reglum. Þetta er {word}.",
+    "aðferð": "Svona leysum við dæmið. Þetta er ein {word}.",
+    "tækifæri": "Nú getur þú prófað. Þú færð gott {word}.",
+    "mælikvarði": "Við notum sameiginlega reglu til að meta árangur. Hún er okkar {word}.",
+    "vísindamaður": "Hann rannsakar náttúruna. Hann er {word}.",
+    "hugmynd": "Mér datt eitthvað nýtt í hug. Þetta er góð {word}.",
+    "samskipti": "Fólk talar saman og hlustar. Það á í góðum {word} við hvert annað.",
+    "skilaboð": "Ég sendi vini mínum stuttan texta. Þetta eru {word}.",
+    "leiðari": "Sá sem fer fremstur og vísar veginn er {word}.",
+    "skipulegur": "Hann hefur allt í röð og reglu. Hann er {word}.",
+    "hátalari": "Hljóðið kemur úr tækinu. Þetta er {word}.",
+    "tónlist": "Við hlustum á lag. Þetta er falleg {word}.",
+    "viðhorf": "Þetta er skoðun mín á málinu. Þetta er mitt {word}.",
+    "umræða": "Allir skiptast á skoðunum. Fram fer góð {word}."
+  },
+  "SPELLING_SINGLE_TARGETS": {
+    "gata": "t",
+    "tala": "l",
+    "matur": "t",
+    "biti": "t",
+    "sofa": "f",
+    "koma": "m",
+    "lesa": "s",
+    "vika": "k",
+    "rifa": "f",
+    "hani": "n",
+    "api": "p",
+    "sami": "m",
+    "hita": "t",
+    "bátur": "t",
+    "skata": "t",
+    "leikari": "k",
+    "vinátta": "n",
+    "skólastofa": "f",
+    "sumarið": "m",
+    "ferðalag": "l",
+    "opinn": "p",
+    "nefið": "f",
+    "vikan": "k",
+    "tapið": "p",
+    "falið": "l",
+    "farið": "r",
+    "hitaður": "t",
+    "metið": "t",
+    "rokið": "k",
+    "heili": "l",
+    "skipulag": "p",
+    "samfélag": "m",
+    "aðferð": "f",
+    "tækifæri": "k",
+    "mælikvarði": "l",
+    "vísindamaður": "s",
+    "hugmynd": "g",
+    "samskipti": "m",
+    "skilaboð": "l",
+    "leiðari": "r",
+    "skipulegur": "p",
+    "hátalari": "t",
+    "tónlist": "n",
+    "viðhorf": "r",
+    "umræða": "m"
   }
 }

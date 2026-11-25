@@ -1,412 +1,132 @@
+import {EXERCISES,getExercise,illustration} from './exercises.js';
+import {buildQuestionBank,shuffle} from './questions.js';
 
-const APP_NAME = "Íslenskuæfing PWA";
-const TEACHER_PASSWORD = "11112222";
-const SESSION_OPTIONS = [5, 10, 15, 20];
-const STORAGE_KEY = "islenska_aefing_pwa_v2";
-
-let db = loadDb();
-let dataset = null;
-let deferredPrompt = null;
-
-const state = {
-  sessionQuestions: [],
-  qIndex: 0,
-  correct: 0,
-  incorrect: 0,
-  startTime: 0,
-  currentQuestion: null,
-  student: "",
-  exercise: "",
-  level: "",
-  roundLen: 10,
-};
-
-window.addEventListener("beforeinstallprompt", (e) => {
-  e.preventDefault();
-  deferredPrompt = e;
-  renderMain();
-});
-
-window.addEventListener("appinstalled", () => {
-  deferredPrompt = null;
-  renderMain();
-});
-
-async function init() {
-  const res = await fetch("data.json");
-  dataset = await res.json();
-  if ("serviceWorker" in navigator) {
-    try { await navigator.serviceWorker.register("./sw.js"); } catch (e) {}
-  }
-  renderMain();
+const APP_NAME='Íslenskuæfingar';
+const TEACHER_PASSWORD='11112222';
+const SESSION_OPTIONS=[5,10,15,20];
+const STORAGE_KEY='islenska_aefing_pwa_v2';
+const emptyDb=()=>({sessions:[],high_scores:{},goals:{},students:[],last_student:'',settings:{}});
+let db=loadDb(),dataset=null,deferredPrompt=null,view='loading',voice=null;
+let storageWarning=false;
+const state={exercise:'',level:db.settings.level||'Létt',roundLen:db.settings.roundLen||5,student:'',guest:false,sessionQuestions:[],qIndex:0,correct:0,incorrect:0,answered:false,startTime:0};
+const app=document.getElementById('app');
+function esc(s){return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));}
+function loadDb(){
+  try{
+    const raw=JSON.parse(localStorage.getItem(STORAGE_KEY))||{};
+    const sessions=Array.isArray(raw.sessions)?raw.sessions:[];
+    const students=[...new Set([...(Array.isArray(raw.students)?raw.students:[]),...sessions.map(s=>s.student)].filter(s=>typeof s==='string'&&s.trim()))].sort((a,b)=>a.localeCompare(b,'is'));
+    return {...emptyDb(),...raw,sessions,students,last_student:students.includes(raw.last_student)?raw.last_student:'',settings:raw.settings||{}};
+  }catch{return emptyDb();}
 }
-
-function loadDb() {
-  const fallback = { sessions: [], high_scores: {}, goals: {}, students: [], last_student: "" };
-  try {
-    const raw = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
-    const sessions = Array.isArray(raw.sessions) ? raw.sessions : [];
-    const inferredStudents = [...new Set(sessions.map(s => s.student).filter(Boolean))];
-    const savedStudents = Array.isArray(raw.students) ? raw.students.filter(Boolean) : [];
-    const students = [...new Set([...savedStudents, ...inferredStudents])].sort((a,b)=>a.localeCompare(b,'is'));
-    const lastStudent = raw.last_student && students.includes(raw.last_student) ? raw.last_student : (students[0] || "");
-    return {
-      sessions,
-      high_scores: raw.high_scores || {},
-      goals: raw.goals || {},
-      students,
-      last_student: lastStudent,
-    };
-  } catch {
-    return fallback;
-  }
+function saveDb(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify(db));}catch{storageWarning=true;}}
+function sortedStudents(){return [...new Set(db.students||[])].sort((a,b)=>a.localeCompare(b,'is'));}
+function addStudent(name){const clean=String(name||'').trim();if(!clean)return false;db.students=[...new Set([...db.students,clean])];db.last_student=clean;saveDb();return true;}
+function getAllExercises(){return dataset.ALL_EXERCISES;}
+function focusHeading(){document.querySelector('[data-focus]')?.focus({preventScroll:true});window.scrollTo(0,0);}
+function stopSpeech(){window.speechSynthesis?.cancel();}
+function speak(text){if(!voice)return;stopSpeech();const utterance=new SpeechSynthesisUtterance(text);utterance.voice=voice;utterance.lang='is-IS';utterance.rate=.85;window.speechSynthesis.speak(utterance);}
+function refreshVoices(){
+  voice=window.speechSynthesis?.getVoices().find(v=>/^is(?:-|$)/i.test(v.lang))||null;
+  document.querySelectorAll('[data-speak]').forEach(b=>{b.disabled=!voice;b.title=voice?'Lesa upp á íslensku':'Íslensk rödd er ekki tiltæk í þessum vafra';});
+  document.querySelectorAll('[data-voice-note]').forEach(n=>{n.hidden=Boolean(voice);});
 }
-function saveDb() {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(db));
-}
-function sortedStudents() {
-  return [...new Set((db.students || []).filter(Boolean))].sort((a,b)=>a.localeCompare(b,'is'));
-}
-function addStudent(name) {
-  const clean = String(name || "").trim();
-  if (!clean) return false;
-  db.students = sortedStudents().concat(clean).filter((v,i,a)=>a.indexOf(v)===i).sort((a,b)=>a.localeCompare(b,'is'));
-  db.last_student = clean;
-  saveDb();
-  return true;
-}
-function esc(s) {
-  return String(s).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
-}
-function shuffle(arr, rng = Math.random) {
-  const a = [...arr];
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(rng() * (i + 1));
-    [a[i], a[j]] = [a[j], a[i]];
-  }
-  return a;
-}
-function seededRandom(seedStr) {
-  let h = 2166136261 >>> 0;
-  for (let i = 0; i < seedStr.length; i++) {
-    h ^= seedStr.charCodeAt(i);
-    h = Math.imul(h, 16777619);
-  }
-  return function() {
-    h += 0x6D2B79F5;
-    let t = Math.imul(h ^ (h >>> 15), 1 | h);
-    t ^= t + Math.imul(t ^ (t >>> 7), 61 | t);
-    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
-  };
-}
-function choiceQuestion(prompt, choices, answer, meta) {
-  return { prompt, choices, answer, meta };
-}
-
-function titleCaseExerciseInfo() {
-  return `
-    <ul class="exercise-list">
-      <li><b>Stafsetning</b>: i/y, ei/ey, ng/nk, tvöfaldur samhljóði</li>
-      <li><b>Orðaforði</b>: samheiti, andheiti, orð og skýring</li>
-      <li><b>Málfræði</b>: orðflokkar, kyn, tala, tíð og fall</li>
-    </ul>
-    <p class="meta">Öll svör eru nú með smellivalkostum. Hver lota dregur án endurtekninga úr 30 dæma banka á valda stiginu.</p>`;
-}
-
-function getAllExercises() {
-  return dataset.ALL_EXERCISES;
-}
-
-function renderMain() {
-  const app = document.getElementById("app");
-  const exercises = getAllExercises();
-  const studentNames = sortedStudents();
-  const selectedStudent = db.last_student && studentNames.includes(db.last_student) ? db.last_student : (studentNames[0] || "");
-  const installButton = deferredPrompt ? `<button id="installBtn" class="btn secondary">Setja upp app</button>` : "";
-  app.innerHTML = `
-    <div class="screen">
-      <div class="topbar">
-        <div>
-          <h1>${APP_NAME}</h1>
-          <div class="install-hint">Virkar í Chrome og má setja upp sem app á Chromebook, Windows og síma.</div>
-        </div>
-        <div class="row">
-          ${installButton}
-          <button id="teacherBtn" class="btn secondary">Kennari</button>
-        </div>
-      </div>
-
-      <div class="grid main-grid">
-        <section class="card">
-          <h2>Stillingar</h2>
-          <div class="field">
-            <label for="studentSelect">Velja nemanda</label>
-            <select id="studentSelect">
-              <option value="">Veldu nemanda</option>
-              ${studentNames.map(name => `<option value="${esc(name)}" ${name===selectedStudent?'selected':''}>${esc(name)}</option>`).join("")}
-            </select>
-          </div>
-          <div class="field">
-            <label for="newStudent">Eða búa til nýjan nemanda</label>
-            <div class="row">
-              <input id="newStudent" type="text" placeholder="Nýtt nafn nemanda">
-              <button id="addStudentBtn" class="btn secondary" type="button">Nýr</button>
-            </div>
-          </div>
-          <div class="field">
-            <label for="exercise">Flokkur</label>
-            <select id="exercise">${exercises.map(x => `<option>${esc(x)}</option>`).join("")}</select>
-          </div>
-          <div class="field">
-            <label for="level">Erfiðleiki</label>
-            <select id="level">${dataset.LEVELS.map(x => `<option>${esc(x)}</option>`).join("")}</select>
-          </div>
-          <div class="field">
-            <label for="roundLen">Fjöldi spurninga í lotu</label>
-            <select id="roundLen">${SESSION_OPTIONS.map(n => `<option value="${n}" ${n===10?'selected':''}>${n}</option>`).join("")}</select>
-          </div>
-          <div class="row">
-            <button id="startBtn" class="btn primary">Byrja lotu</button>
-          </div>
-          ${studentNames.length ? `<div class="notice" style="margin-top:14px">Skráðir nemendur á þessu tæki: ${studentNames.map(esc).join(", ")}</div>` : ""}
-        </section>
-
-        <section class="card">
-          <h2>Um æfingarnar</h2>
-          ${titleCaseExerciseInfo()}
-          <div class="notice" style="margin-top:14px">
-            <b>Gögn:</b> Gögn og met vistast í vafranum á þessu tæki. Ef þú vilt sameiginleg gögn milli tækja þarf síðar að tengja við netgagnagrunn.
-          </div>
-        </section>
-      </div>
-    </div>
-  `;
-  document.getElementById("startBtn").onclick = startSession;
-  document.getElementById("teacherBtn").onclick = teacherLogin;
-  document.getElementById("addStudentBtn").onclick = () => {
-    const input = document.getElementById("newStudent");
-    const name = input.value.trim();
-    if (!name) {
-      alert("Sláðu inn nafn nemanda.");
-      return;
-    }
-    addStudent(name);
+function bindSpeech(){document.querySelectorAll('[data-speak]').forEach(b=>b.onclick=()=>speak(b.dataset.speak));refreshVoices();}
+function readButton(text,label='Lesa upp'){return `<button class="btn read-btn" type="button" data-speak="${esc(text)}" aria-label="${esc(label)}"><span aria-hidden="true">◖))</span> ${esc(label)}</button>`;}
+window.speechSynthesis?.addEventListener('voiceschanged',refreshVoices);
+window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e;if(view==='home')showInstallButton();});
+window.addEventListener('appinstalled',()=>{deferredPrompt=null;document.getElementById('installBtn')?.remove();});
+function showInstallButton(){const slot=document.getElementById('installSlot');if(slot){slot.innerHTML='<button id="installBtn" class="btn" type="button">Setja upp app</button>';document.getElementById('installBtn').onclick=installApp;}}
+async function installApp(){if(!deferredPrompt)return;await deferredPrompt.prompt();await deferredPrompt.userChoice;deferredPrompt=null;document.getElementById('installBtn')?.remove();}
+async function init(){
+  try{
+    const response=await fetch('./data.json');if(!response.ok)throw new Error('data');dataset=await response.json();
+    if(!dataset.LEVELS.includes(state.level))state.level=dataset.LEVELS[0];
+    if(!SESSION_OPTIONS.includes(state.roundLen))state.roundLen=5;
     renderMain();
-  };
-  if (deferredPrompt) {
-    document.getElementById("installBtn").onclick = installApp;
+    if('serviceWorker' in navigator)navigator.serviceWorker.register('./sw.js').catch(()=>{});
+  }catch{app.innerHTML='<main class="screen error-card"><h1>Æfingarnar náðust ekki</h1><p>Athugaðu nettenginguna og reyndu aftur.</p><button class="btn primary" id="retryBtn">Reyna aftur</button></main>';document.getElementById('retryBtn').onclick=init;}
+}
+function renderMain(){
+  view='home';stopSpeech();const names=sortedStudents();
+  app.innerHTML=`<main class="screen home-screen">
+    <header class="topbar"><a class="brand" href="./" aria-label="Íslenskuæfingar, forsíða"><span class="brand-icon" aria-hidden="true">Í</span><span>${APP_NAME}<small>Smá skref. Meiri færni.</small></span></a><nav class="row" aria-label="Aðgerðir"><span id="installSlot"></span><button id="teacherBtn" class="btn quiet">Kennari</button></nav></header>
+    <section class="welcome"><div><p class="eyebrow">LESA · SKILJA · ÆFA</p><h1 data-focus tabindex="-1">Hvað viltu æfa?</h1><p class="muted">Veldu spjald og skoðaðu dæmi.</p></div>
+      <div class="student-bar"><label for="studentSelect">Hver ert þú?</label><select id="studentSelect"><option value="">Æfa án nafns</option>${names.map(n=>`<option value="${esc(n)}" ${n===db.last_student?'selected':''}>${esc(n)}</option>`).join('')}</select><details id="newStudentDetails"><summary>Bæta við nafni</summary><form id="studentForm"><label for="newStudent">Nafn eða gælunafn</label><div class="row"><input id="newStudent" type="text" maxlength="60" autocomplete="off" required><button id="addStudentBtn" class="btn primary">Bæta við</button></div></form></details></div>
+    </section>
+    <div class="activity-grid" aria-label="Veldu verkefni">${EXERCISES.map(e=>`<button type="button" class="activity-card ${e.tone}" data-exercise="${esc(e.id)}" aria-label="${esc(e.title)}: ${esc(e.short)}" aria-haspopup="dialog"><span class="card-category">${e.group}</span>${illustration(e.id)}<span class="activity-title">${e.title}</span><span class="activity-description">${e.short}</span><span class="card-arrow" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 16L16 4M5 4H16V15"/></svg></span></button>`).join('')}</div>
+    <footer class="home-footer"><span>12 verkefni · 3 erfiðleikastig · Stuttar æfingalotur</span><span>Framvinda vistast á þessu tæki.</span></footer>
+    ${storageWarning?'<p class="notice" role="status">Vafrinn gat ekki vistað framvinduna. Þú getur samt æft.</p>':''}
+    <dialog id="setupDialog" aria-labelledby="setupTitle"></dialog>
+  </main>`;
+  document.getElementById('teacherBtn').onclick=teacherLogin;
+  document.getElementById('studentSelect').onchange=e=>{db.last_student=e.target.value;saveDb();};
+  document.getElementById('studentForm').onsubmit=e=>{e.preventDefault();const name=document.getElementById('newStudent').value.trim();if(addStudent(name)){renderMain();document.getElementById('studentSelect').focus();}};
+  document.querySelectorAll('[data-exercise]').forEach(b=>b.onclick=()=>showSetup(b.dataset.exercise));
+  if(deferredPrompt)showInstallButton();
+}
+function showSetup(id){
+  stopSpeech();state.exercise=id;const e=getExercise(id),dialog=document.getElementById('setupDialog');
+  dialog.innerHTML=`<div class="setup-header"><span class="eyebrow">${e.group}</span><button class="btn quiet close-btn" id="closeSetup" aria-label="Loka og velja annað verkefni">✕</button></div>
+    <div class="setup-intro ${e.tone}">${illustration(id)}<h2 id="setupTitle">${e.title}</h2><p>${e.help}</p>${readButton(`${e.title}. ${e.help}. Dæmi: ${e.result}.`,'Lesa leiðbeiningar')}</div>
+    <div class="example-box"><span class="eyebrow">DÆMI · EKKI METIÐ</span><div class="example-line"><strong>${esc(e.example)}</strong><span aria-hidden="true">→</span><span class="example-answer">${esc(e.answer)}</span></div><p>${esc(e.result)}</p></div>
+    <fieldset><legend>Veldu erfiðleika</legend><div class="segmented">${dataset.LEVELS.map((l,i)=>`<label><input type="radio" name="level" value="${l}" ${l===state.level?'checked':''}><span><span class="level-dots" aria-hidden="true">${'●'.repeat(i+1)}</span>${l}</span></label>`).join('')}</div></fieldset>
+    <fieldset><legend>Hvað viltu margar spurningar?</legend><div class="segmented lengths">${SESSION_OPTIONS.map(n=>`<label><input type="radio" name="roundLen" value="${n}" ${n===state.roundLen?'checked':''}><span>${n}</span></label>`).join('')}</div></fieldset>
+    <p class="voice-note muted" data-voice-note>Íslenskur upplestur er ekki tiltækur í þessum vafra.</p>
+    <button class="btn primary start-btn" id="startBtn">Byrja æfingu <span aria-hidden="true">→</span></button>`;
+  document.getElementById('closeSetup').onclick=()=>{stopSpeech();dialog.close();};
+  dialog.oncancel=stopSpeech;dialog.onclose=()=>document.querySelector(`[data-exercise="${CSS.escape(id)}"]`)?.focus();
+  dialog.querySelectorAll('[name="level"]').forEach(r=>r.onchange=()=>{state.level=r.value;});
+  dialog.querySelectorAll('[name="roundLen"]').forEach(r=>r.onchange=()=>{state.roundLen=Number(r.value);});
+  document.getElementById('startBtn').onclick=()=>startSession();bindSpeech();dialog.showModal();
+}
+function startSession(repeat=false){
+  stopSpeech();
+  if(!repeat){state.student=document.getElementById('studentSelect').value;state.guest=!state.student;}
+  const bank=buildQuestionBank(dataset,state.exercise,state.level);
+  if(!bank.length)return;
+  db.settings={level:state.level,roundLen:state.roundLen};saveDb();
+  state.sessionQuestions=shuffle(bank).slice(0,state.roundLen).map(q=>({...q,choices:shuffle(q.choices)}));
+  state.qIndex=0;state.correct=0;state.incorrect=0;state.startTime=Date.now();
+  document.getElementById('setupDialog')?.close();renderSession();
+}
+function renderSession(){
+  view='session';state.answered=false;state.currentQuestion=state.sessionQuestions[state.qIndex];const q=state.currentQuestion,e=getExercise(state.exercise);
+  app.innerHTML=`<main class="screen session-wrap"><header class="session-header"><button class="btn quiet" id="homeBtn">← Velja verkefni</button><div class="session-name">${esc(e.title)}<small>${state.level}${state.student?' · '+esc(state.student):''}</small></div><span class="question-count">${state.qIndex+1} / ${state.sessionQuestions.length}</span></header>
+    <div class="progress-track" role="progressbar" aria-label="Loknar spurningar" aria-valuenow="${state.qIndex}" aria-valuemin="0" aria-valuemax="${state.sessionQuestions.length}">${state.sessionQuestions.map((_,i)=>`<span class="${i<state.qIndex?'done':i===state.qIndex?'current':''}"></span>`).join('')}</div>
+    <section class="card prompt-card"><p class="eyebrow">VELDU EITT SVAR</p><h1 class="question-prompt" data-focus tabindex="-1">${esc(q.prompt)}</h1><div class="question-subject">${esc(q.subject)}</div>${q.context?`<p class="question-context">${esc(q.context)}</p>`:''}${readButton(q.speech+' '+q.choices.map((c,i)=>`Valkostur ${['eitt','tvö','þrjú','fjögur'][i]}: ${c}.`).join(' '))}<div class="choices">${q.choices.map((c,i)=>`<button class="choice" data-choice="${esc(c)}"><span class="choice-key" aria-hidden="true">${i+1}</span><span>${esc(c)}</span><span class="choice-mark" aria-hidden="true"></span></button>`).join('')}</div>
+    <details class="help-box"><summary>Hjálp · Hvernig geri ég þetta?</summary><p>${esc(e.help)}</p></details></section>
+    <section class="feedback-panel" aria-label="Endurgjöf"><div id="feedback" role="status" aria-live="polite" aria-atomic="true"><p class="muted">Skoðaðu vel. Þú hefur nægan tíma.</p></div><button class="btn primary next-btn" id="nextBtn" hidden>Næsta <span aria-hidden="true">→</span></button></section>
+    <p class="voice-note muted" data-voice-note>Íslenskur upplestur er ekki tiltækur í þessum vafra.</p>
+  </main>`;
+  document.querySelectorAll('[data-choice]').forEach(b=>b.onclick=()=>submitChoice(b.dataset.choice));
+  document.getElementById('nextBtn').onclick=nextQuestion;
+  document.getElementById('homeBtn').onclick=()=>{if(state.qIndex||state.answered){if(!confirm('Hætta í þessari lotu? Ólokin lota vistast ekki.'))return;}renderMain();focusHeading();};
+  bindSpeech();focusHeading();
+}
+function submitChoice(choice){
+  if(state.answered||!state.currentQuestion.choices.includes(choice))return;
+  stopSpeech();state.answered=true;const q=state.currentQuestion,correct=choice===q.answer;
+  if(correct)state.correct++;else state.incorrect++;
+  document.querySelectorAll('[data-choice]').forEach(b=>{b.disabled=true;if(b.dataset.choice===q.answer){b.classList.add('correct');b.querySelector('.choice-mark').textContent='✓';}else if(b.dataset.choice===choice){b.classList.add('wrong');b.querySelector('.choice-mark').textContent='✕';}});
+  const fb=document.getElementById('feedback');fb.className=`feedback ${correct?'good':'review'}`;
+  fb.innerHTML=`<strong>${correct?'✓ Rétt!':'Skoðum þetta saman'}</strong><p>${correct?'Rétt svar':'Rétt svar er'}: <b>${esc(q.solution)}</b></p><p class="feedback-explanation">${esc(q.explanation)}</p>`;
+  const next=document.getElementById('nextBtn');next.hidden=false;next.innerHTML=`${state.qIndex===state.sessionQuestions.length-1?'Sjá niðurstöðu':'Næsta'} <span aria-hidden="true">→</span>`;
+  next.focus({preventScroll:true});
+}
+function nextQuestion(){if(!state.answered)return;stopSpeech();state.qIndex++;if(state.qIndex>=state.sessionQuestions.length)endSession();else renderSession();}
+function endSession(){
+  if(view!=='session')return;view='result';
+  const elapsedSeconds=Math.max((Date.now()-state.startTime)/1000,1),correctPerMin=state.correct/(elapsedSeconds/60),accuracy=100*state.correct/state.sessionQuestions.length;
+  if(!state.guest){
+    const key=`${state.student}|${state.exercise}|${state.level}`;db.high_scores[key]=Math.max(db.high_scores[key]||0,correctPerMin);
+    db.sessions.push({timestamp:new Date().toISOString().slice(0,19).replace('T',' '),student:state.student,exercise:state.exercise,level:state.level,round_len:state.sessionQuestions.length,correct:state.correct,incorrect:state.incorrect,accuracy:Number(accuracy.toFixed(1)),correct_per_min:Number(correctPerMin.toFixed(2)),elapsed_seconds:Number(elapsedSeconds.toFixed(1))});saveDb();
   }
+  app.innerHTML=`<main class="screen result-screen"><div class="result-icon" aria-hidden="true">✓</div><p class="eyebrow">LOTA LOKIÐ</p><h1 data-focus tabindex="-1">Vel gert að æfa!</h1><p class="muted">${esc(getExercise(state.exercise).title)} · ${state.level}</p><div class="result-score"><strong>${state.correct}<span> / ${state.sessionQuestions.length}</span></strong><p>rétt svör</p></div><p>${state.incorrect?`Þú getur æft aftur og haldið áfram að læra.`:'Þú svaraðir öllum spurningunum rétt.'}</p><div class="result-actions"><button class="btn primary" id="againBtn">Æfa aftur ↻</button><button class="btn" id="chooseBtn">Velja annað verkefni →</button></div><p class="muted">${storageWarning?'Framvindan gat ekki vistast í vafranum.':state.guest?'Þú æfðir án nafns. Þessi lota var ekki vistuð.':'Framvindan þín er vistuð á þessu tæki.'}</p></main>`;
+  document.getElementById('againBtn').onclick=()=>startSession(true);document.getElementById('chooseBtn').onclick=()=>{renderMain();focusHeading();};focusHeading();
 }
-
-async function installApp() {
-  if (!deferredPrompt) return;
-  deferredPrompt.prompt();
-  await deferredPrompt.userChoice;
-  deferredPrompt = null;
-  renderMain();
-}
-
-function teacherLogin() {
-  const pw = prompt("Sláðu inn lykilorð kennara:");
-  if (pw === null) return;
-  if (pw !== TEACHER_PASSWORD) {
-    alert("Rangt lykilorð.");
-    return;
-  }
-  renderTeacherArea();
-}
-
-function buildChoices(correct, pool, seed) {
-  const others = pool.filter(x => x !== correct);
-  const rng = seededRandom(seed);
-  const distractors = [];
-  while (distractors.length < 2 && others.length) {
-    const pick = others[Math.floor(rng() * others.length)];
-    if (!distractors.includes(pick)) distractors.push(pick);
-  }
-  return shuffle([...distractors, correct], rng);
-}
-
-function makeSpellingPattern(word, exercise) {
-  if (exercise === "i/y") {
-    for (const target of ["í", "i", "y", "ý"]) {
-      const idx = word.indexOf(target);
-      if (idx !== -1) return [word.slice(0, idx) + "_" + word.slice(idx + 1), target, ["i", "í", "y", "ý"]];
-    }
-  }
-  if (exercise === "ei/ey") {
-    for (const target of ["ei", "ey"]) {
-      const idx = word.indexOf(target);
-      if (idx !== -1) return [word.slice(0, idx) + "__" + word.slice(idx + 2), target, ["ei", "ey"]];
-    }
-  }
-  if (exercise === "ng/nk") {
-    for (const target of ["ng", "nk"]) {
-      const idx = word.indexOf(target);
-      if (idx !== -1) return [word.slice(0, idx) + "__" + word.slice(idx + 2), target, ["ng", "nk"]];
-    }
-  }
-  if (exercise === "tvöfaldur samhljóði") {
-    const match = word.match(/([bcdfghjklmnpqrstvxzþð])\1/);
-    if (match) {
-      const target = match[0];
-      const single = target[0];
-      const otherDoubleMap = {ll:"nn", nn:"ll", pp:"tt", tt:"pp", kk:"mm", mm:"kk", ss:"rr", rr:"ss", gg:"ll", ff:"nn", bb:"ll", dd:"nn"};
-      const otherDouble = otherDoubleMap[target] || (target !== "nn" ? "nn" : "ll");
-      const idx = match.index;
-      return [word.slice(0, idx) + "__" + word.slice(idx + 2), target, shuffle([target, single, otherDouble], seededRandom(word))];
-    }
-  }
-  return [word, "", [""]];
-}
-
-function makeSpellingBank(exercise, level) {
-  return dataset.SPELLING_WORDS[exercise][level].slice(0, 30).map((word, i) => {
-    const [pattern, answer, choices] = makeSpellingPattern(word, exercise);
-    const rng = seededRandom(`${exercise}|${level}|${i+1}`);
-    return choiceQuestion(`Veldu hvaða bókstafur eða bókstafir passa í orðið: ${pattern}`, shuffle(choices, rng), answer, `${exercise}|${level}|${word}|${i+1}`);
-  });
-}
-function makeVocabBank(type, level) {
-  if (type === "samheiti") {
-    const items = dataset.VOCAB_SYNONYMS[level].slice(0, 30);
-    const pool = items.map(x => x[1]);
-    return items.map(([word, ans], i) => choiceQuestion(`Hvaða orð er samheiti við „${word}“?`, buildChoices(ans, pool, `syn|${level}|${i}`), ans, `syn|${level}|${word}|${i+1}`));
-  }
-  if (type === "andheiti") {
-    const items = dataset.VOCAB_ANTONYMS[level].slice(0, 30);
-    const pool = items.map(x => x[1]);
-    return items.map(([word, ans], i) => choiceQuestion(`Hvaða orð er andheiti við „${word}“?`, buildChoices(ans, pool, `ant|${level}|${i}`), ans, `ant|${level}|${word}|${i+1}`));
-  }
-  const items = dataset.VOCAB_DEFS[level].slice(0, 30);
-  const pool = items.map(x => x[0]);
-  return items.map(([word, definition], i) => choiceQuestion(`Hvaða orð passar við skýringuna: „${definition}“?`, buildChoices(word, pool, `def|${level}|${i}`), word, `def|${level}|${word}|${i+1}`));
-}
-function makeFixedChoiceBank(items, promptTemplate, choices, prefix, level) {
-  return items.slice(0, 30).map(([thing, ans], i) => choiceQuestion(promptTemplate.replace("{thing}", thing), [...choices], ans, `${prefix}|${level}|${thing}|${i+1}`));
-}
-function buildQuestionBank(exercise, level) {
-  if (dataset.SPELLING_EXERCISES.includes(exercise)) return makeSpellingBank(exercise, level);
-  if (dataset.VOCAB_EXERCISES.includes(exercise)) return makeVocabBank(exercise, level);
-  if (exercise === "orðflokkar") return makeFixedChoiceBank(dataset.WORD_CLASSES[level], "Hvaða orðflokkur er orðið „{thing}“?", ["nafnorð","sagnorð","lýsingarorð"], "wc", level);
-  if (exercise === "kyn") return makeFixedChoiceBank(dataset.GENDER_DATA[level], "Hvaða kyn er orðið „{thing}“?", ["karlkyn","kvenkyn","hvorugkyn"], "gender", level);
-  if (exercise === "tala") return makeFixedChoiceBank(dataset.NUMBER_DATA[level], "Er orðið „{thing}“ í eintölu eða fleirtölu?", ["eintala","fleirtala"], "number", level);
-  if (exercise === "tíð") return makeFixedChoiceBank(dataset.TENSE_DATA[level], "Í hvaða tíð er þetta: „{thing}“?", ["nútíð","þátíð"], "tense", level);
-  if (exercise === "fall") return makeFixedChoiceBank(dataset.CASE_DATA[level], "Hvaða fall sést hér: „{thing}“?", ["nefnifall","þolfall","þágufall","eignarfall"], "case", level);
-  return [];
-}
-
-function startSession() {
-  const selected = document.getElementById("studentSelect").value.trim();
-  const typed = document.getElementById("newStudent")?.value.trim() || "";
-  const student = typed || selected;
-  const exercise = document.getElementById("exercise").value;
-  const level = document.getElementById("level").value;
-  const roundLen = Number(document.getElementById("roundLen").value);
-  if (!student) {
-    alert("Veldu eða búðu til nemanda.");
-    return;
-  }
-  addStudent(student);
-  const bank = buildQuestionBank(exercise, level);
-  if (roundLen > bank.length) {
-    alert(`Það eru bara ${bank.length} dæmi á þessu stigi.`);
-    return;
-  }
-  state.student = student;
-  state.exercise = exercise;
-  state.level = level;
-  state.roundLen = roundLen;
-  state.sessionQuestions = shuffle(bank).slice(0, roundLen);
-  state.qIndex = 0;
-  state.correct = 0;
-  state.incorrect = 0;
-  state.startTime = Date.now();
-  renderSession();
-}
-function renderSession() {
-  const app = document.getElementById("app");
-  const q = state.sessionQuestions[state.qIndex];
-  state.currentQuestion = q;
-  const elapsed = Math.max((Date.now() - state.startTime) / 60000, 1/60);
-  const cpm = state.correct / elapsed;
-  app.innerHTML = `
-    <div class="session-wrap screen">
-      <section class="card header-card">
-        <div>
-          <h2>${esc(state.student)} • ${esc(state.exercise)} • ${esc(state.level)}</h2>
-          <div class="statline">Spurning ${state.qIndex + 1}/${state.roundLen}</div>
-        </div>
-        <div class="statline">Rétt: ${state.correct} &nbsp; Rangt: ${state.incorrect} &nbsp; Rétt/mín: ${cpm.toFixed(1)}</div>
-      </section>
-
-      <section class="card prompt-card">
-        <div class="prompt">${esc(q.prompt)}</div>
-        <div class="choices">
-          ${q.choices.map((choice, idx) => `<button class="choice" data-choice="${esc(choice)}">${esc(choice)}</button>`).join("")}
-        </div>
-      </section>
-
-      <section class="card center" style="min-height:90px">
-        <div class="feedback" id="feedback"></div>
-      </section>
-    </div>
-  `;
-  document.querySelectorAll(".choice").forEach(btn => btn.onclick = () => submitChoice(btn.dataset.choice));
-}
-function submitChoice(choice) {
-  const q = state.currentQuestion;
-  const buttons = [...document.querySelectorAll(".choice")];
-  buttons.forEach(btn => {
-    btn.disabled = true;
-    if (btn.dataset.choice === q.answer) btn.classList.add("correct");
-    else if (btn.dataset.choice === choice) btn.classList.add("wrong");
-  });
-  const fb = document.getElementById("feedback");
-  if (choice === q.answer) {
-    state.correct += 1;
-    fb.textContent = "Rétt svar!";
-    fb.style.color = "#2e8b57";
-  } else {
-    state.incorrect += 1;
-    fb.textContent = `Rangt svar. Rétt svar er: ${q.answer}`;
-    fb.style.color = "#b22222";
-  }
-  setTimeout(nextQuestion, 900);
-}
-function nextQuestion() {
-  state.qIndex += 1;
-  if (state.qIndex >= state.roundLen) return endSession();
-  renderSession();
-}
-function endSession() {
-  const elapsedSeconds = Math.max((Date.now() - state.startTime) / 1000, 1);
-  const correctPerMin = state.correct / (elapsedSeconds / 60);
-  const accuracy = (state.correct / Math.max(state.correct + state.incorrect, 1)) * 100;
-  const key = `${state.student}|${state.exercise}|${state.level}`;
-  const oldBest = db.high_scores[key] || 0;
-  const newRecord = correctPerMin > oldBest;
-  if (newRecord) db.high_scores[key] = correctPerMin;
-  db.sessions.push({
-    timestamp: new Date().toISOString().slice(0,19).replace("T"," "),
-    student: state.student,
-    exercise: state.exercise,
-    level: state.level,
-    round_len: state.roundLen,
-    correct: state.correct,
-    incorrect: state.incorrect,
-    accuracy: Number(accuracy.toFixed(1)),
-    correct_per_min: Number(correctPerMin.toFixed(2)),
-    elapsed_seconds: Number(elapsedSeconds.toFixed(1))
-  });
-  saveDb();
-  const goalKey = `${state.student}|${state.exercise}`;
-  const goal = db.goals[goalKey];
-  const goalLine = goal ? `\nMarkmið í þessari æfingu: ${goal} rétt/mín.` : "";
-  alert(`Lota búin!\n\nRétt svör: ${state.correct}\nRöng svör: ${state.incorrect}\nNákvæmni: ${accuracy.toFixed(1)}%\nRétt á mínútu: ${correctPerMin.toFixed(2)}\n${newRecord ? `\nNÝTT MET! Fyrra met var ${oldBest.toFixed(2)} rétt á mínútu.` : `\nBest hjá þér í þessari æfingu: ${oldBest.toFixed(2)} rétt á mínútu.`}${goalLine}`);
-  renderMain();
-}
-
+function teacherLogin(){const pw=prompt('Sláðu inn lykilorð kennara:');if(pw===null)return;if(pw!==TEACHER_PASSWORD){alert('Rangt lykilorð.');return;}view='teacher';renderTeacherArea();}
+window.addEventListener('keydown',e=>{if(view!=='session'||e.altKey||e.ctrlKey||e.metaKey||!['1','2','3','4'].includes(e.key)||!e.target.closest('.session-wrap'))return;if(state.answered)return;const q=state.currentQuestion;const choice=q.choices[Number(e.key)-1];if(choice){e.preventDefault();submitChoice(choice);}});
 function renderTeacherArea() {
   const app = document.getElementById("app");
   const students = sortedStudents();
@@ -415,7 +135,7 @@ function renderTeacherArea() {
   app.innerHTML = `
     <div class="screen">
       <div class="topbar">
-        <h1>Kennarasvæði</h1>
+        <div><h1>Kennarasvæði</h1><p class="muted">Gögn vistast í þessum vafra. Tími lotu inniheldur lestur endurgjafar.</p></div>
         <div class="row">
           <button id="exportBtn" class="btn secondary">Flytja út CSV</button>
           <button id="resetBtn" class="btn warn">Eyða öllum gögnum</button>
@@ -442,19 +162,19 @@ function renderTeacherArea() {
 
       <section id="tab-progress" class="tab-pane card hidden">
         <div class="row" style="margin-bottom:12px">
-          <select id="progressStudent">${students.map(s => `<option ${s===defaultStudent?'selected':''}>${esc(s)}</option>`).join("")}</select>
-          <select id="progressExercise">${getAllExercises().map(s => `<option ${s===defaultExercise?'selected':''}>${esc(s)}</option>`).join("")}</select>
+          <select id="progressStudent" aria-label="Nemandi">${students.map(s => `<option ${s===defaultStudent?'selected':''}>${esc(s)}</option>`).join("")}</select>
+          <select id="progressExercise" aria-label="Æfing">${getAllExercises().map(s => `<option ${s===defaultExercise?'selected':''}>${esc(s)}</option>`).join("")}</select>
           <button id="showProgressBtn" class="btn secondary">Sýna</button>
         </div>
         <div id="progressBox" class="notice"></div>
       </section>
 
       <section id="tab-goals" class="tab-pane card hidden">
-        <div class="grid" style="grid-template-columns:1fr 1fr;align-items:start">
+        <div class="grid teacher-goals">
           <div>
-            <div class="field"><label>Nemandi</label><select id="goalStudent">${students.map(s => `<option>${esc(s)}</option>`).join("")}</select></div>
-            <div class="field"><label>Æfing</label><select id="goalExercise">${getAllExercises().map(s => `<option>${esc(s)}</option>`).join("")}</select></div>
-            <div class="field"><label>Markmið rétt/mín</label><input id="goalValue" type="number" step="0.1" min="0"></div>
+            <div class="field"><label for="goalStudent">Nemandi</label><select id="goalStudent">${students.map(s => `<option>${esc(s)}</option>`).join("")}</select></div>
+            <div class="field"><label for="goalExercise">Æfing</label><select id="goalExercise">${getAllExercises().map(s => `<option>${esc(s)}</option>`).join("")}</select></div>
+            <div class="field"><label for="goalValue">Markmið rétt/mín</label><input id="goalValue" type="number" step="0.1" min="0"></div>
             <button id="saveGoalBtn" class="btn primary">Vista markmið</button>
           </div>
           <div>
@@ -468,7 +188,7 @@ function renderTeacherArea() {
   document.getElementById("backBtn").onclick = renderMain;
   document.getElementById("resetBtn").onclick = () => {
     if (confirm("Ertu viss um að þú viljir eyða öllum gögnum á þessu tæki?")) {
-      db = { sessions: [], high_scores: {}, goals: {} };
+      db = emptyDb();
       saveDb();
       renderTeacherArea();
     }
@@ -521,8 +241,8 @@ function saveGoal() {
   const student = document.getElementById("goalStudent").value;
   const exercise = document.getElementById("goalExercise").value;
   const val = parseFloat(document.getElementById("goalValue").value.replace(",", "."));
-  if (Number.isNaN(val)) {
-    alert("Sláðu inn tölu fyrir markmið.");
+  if (!student || !exercise || !Number.isFinite(val) || val < 0) {
+    alert("Veldu nemanda og sláðu inn markmið sem er 0 eða hærra.");
     return;
   }
   db.goals[`${student}|${exercise}`] = val;
@@ -534,7 +254,7 @@ function exportCSV() {
   const rows = [["timestamp","student","exercise","level","correct","incorrect","correct_per_min","accuracy"]];
   db.sessions.forEach(s => rows.push([s.timestamp,s.student,s.exercise,s.level,s.correct,s.incorrect,s.correct_per_min,s.accuracy]));
   const csv = rows.map(r => r.map(v => `"${String(v).replaceAll('"','""')}"`).join(",")).join("\n");
-  const blob = new Blob([csv], {type:"text/csv;charset=utf-8;"});
+  const blob = new Blob(["\uFEFF",csv], {type:"text/csv;charset=utf-8;"});
   const a = document.createElement("a");
   a.href = URL.createObjectURL(blob);
   a.download = "islensku_aefing_gogn.csv";

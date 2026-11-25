@@ -437,364 +437,364 @@
         "kátur"
       ],
       [
-        "stór",
-        "mikill"
-      ],
-      [
-        "lítill",
-        "smár"
+        "kátur",
+        "glaður"
       ],
       [
         "fallegur",
-        "snotur"
+        "flottur"
       ],
       [
-        "hraður",
-        "fljótur"
-      ],
-      [
-        "leiður",
-        "dapur"
-      ],
-      [
-        "snjall",
-        "klár"
-      ],
-      [
-        "sterkur",
-        "öflugur"
-      ],
-      [
-        "veikur",
-        "lasinn"
-      ],
-      [
-        "rólegur",
-        "kyrr"
-      ],
-      [
-        "góður",
-        "ágætur"
-      ],
-      [
-        "bjartur",
-        "ljós"
-      ],
-      [
-        "dimmur",
-        "myrkur"
-      ],
-      [
-        "hlýr",
-        "heitur"
-      ],
-      [
-        "ríkur",
-        "efnaður"
-      ],
-      [
-        "líflegur",
-        "fjörugur"
-      ],
-      [
-        "gamall",
-        "aldinn"
-      ],
-      [
-        "hreinn",
-        "tandurhreinn"
-      ],
-      [
-        "fyndinn",
-        "skemmtilegur"
-      ],
-      [
-        "sætur",
-        "yndislegur"
+        "flottur",
+        "fallegur"
       ],
       [
         "vondur",
         "slæmur"
       ],
       [
-        "flottur",
-        "glæsilegur"
+        "slæmur",
+        "vondur"
       ],
       [
-        "duglegur",
-        "iðinn"
+        "veikur",
+        "lasinn"
       ],
       [
-        "latur",
-        "letilegur"
+        "lasinn",
+        "veikur"
       ],
       [
-        "feginn",
-        "ánægður"
+        "krakki",
+        "barn"
       ],
       [
-        "háttur",
-        "venja"
+        "barn",
+        "krakki"
       ],
       [
-        "áhugasamur",
-        "forvitinn"
+        "strákur",
+        "drengur"
       ],
       [
-        "sanngjarn",
-        "réttlátur"
+        "drengur",
+        "strákur"
       ],
       [
-        "kurteis",
-        "siðprúður"
+        "stelpa",
+        "stúlka"
       ],
       [
-        "vinalegur",
-        "hlýlegur"
+        "stúlka",
+        "stelpa"
+      ],
+      [
+        "mamma",
+        "móðir"
+      ],
+      [
+        "móðir",
+        "mamma"
+      ],
+      [
+        "pabbi",
+        "faðir"
+      ],
+      [
+        "faðir",
+        "pabbi"
+      ],
+      [
+        "ganga",
+        "labba"
+      ],
+      [
+        "labba",
+        "ganga"
+      ],
+      [
+        "borða",
+        "éta"
+      ],
+      [
+        "éta",
+        "borða"
+      ],
+      [
+        "tala",
+        "spjalla"
+      ],
+      [
+        "spjalla",
+        "tala"
+      ],
+      [
+        "öskra",
+        "hrópa"
+      ],
+      [
+        "hrópa",
+        "öskra"
+      ],
+      [
+        "hoppa",
+        "stökkva"
+      ],
+      [
+        "stökkva",
+        "hoppa"
+      ],
+      [
+        "kaupa",
+        "versla"
+      ],
+      [
+        "versla",
+        "kaupa"
       ]
     ],
     "Miðlungs": [
       [
-        "ákveðinn",
-        "staðfastur"
+        "glaður",
+        "kátur"
       ],
       [
-        "hræddur",
-        "óttasleginn"
+        "kátur",
+        "glaður"
       ],
       [
-        "óvenjulegur",
-        "sérkennilegur"
+        "fallegur",
+        "flottur"
       ],
       [
-        "mikilvægur",
-        "þýðingarmikill"
+        "flottur",
+        "fallegur"
       ],
       [
-        "flókinn",
-        "torskilinn"
+        "vondur",
+        "slæmur"
       ],
       [
-        "ánægður",
-        "sáttur"
+        "slæmur",
+        "vondur"
       ],
       [
-        "hugrakkur",
-        "djarfur"
+        "veikur",
+        "lasinn"
       ],
       [
-        "þögull",
-        "hlédrægur"
+        "lasinn",
+        "veikur"
       ],
       [
-        "varkár",
-        "gætinn"
+        "krakki",
+        "barn"
       ],
       [
-        "áreiðanlegur",
-        "traustur"
+        "barn",
+        "krakki"
       ],
       [
-        "örlátur",
-        "gjafmildur"
+        "strákur",
+        "drengur"
       ],
       [
-        "sparsamur",
-        "nægjusamur"
+        "drengur",
+        "strákur"
       ],
       [
-        "sveigjanlegur",
-        "liðugur"
+        "stelpa",
+        "stúlka"
       ],
       [
-        "vandvirkur",
-        "samviskusamur"
+        "stúlka",
+        "stelpa"
       ],
       [
-        "heiðarlegur",
-        "hreinskiptinn"
+        "mamma",
+        "móðir"
       ],
       [
-        "rótfestur",
-        "rótgróinn"
+        "móðir",
+        "mamma"
       ],
       [
-        "óljós",
-        "torskilinn"
+        "pabbi",
+        "faðir"
       ],
       [
-        "skýr",
-        "greinargóður"
+        "faðir",
+        "pabbi"
       ],
       [
-        "friðsæll",
-        "kyrrlátur"
+        "ganga",
+        "labba"
       ],
       [
-        "fús",
-        "reiðubúinn"
+        "labba",
+        "ganga"
       ],
       [
-        "vinsamlegur",
-        "hlýlegur"
+        "borða",
+        "éta"
       ],
       [
-        "sáttfús",
-        "samvinnuþýður"
+        "éta",
+        "borða"
       ],
       [
-        "bjartsýnn",
-        "vonarglaður"
+        "tala",
+        "spjalla"
       ],
       [
-        "nákvæmur",
-        "vandvirkur"
+        "spjalla",
+        "tala"
       ],
       [
-        "virðulegur",
-        "tignarlegur"
+        "öskra",
+        "hrópa"
       ],
       [
-        "léttur",
-        "auðveldur"
+        "hrópa",
+        "öskra"
       ],
       [
-        "samstilltur",
-        "samræmdur"
+        "hoppa",
+        "stökkva"
       ],
       [
-        "hugsi",
-        "íhugull"
+        "stökkva",
+        "hoppa"
       ],
       [
-        "frjór",
-        "skapandi"
+        "kaupa",
+        "versla"
       ],
       [
-        "hógvær",
-        "lítillátur"
+        "versla",
+        "kaupa"
       ]
     ],
     "Erfitt": [
       [
-        "viðkvæmur",
-        "berskjaldaður"
+        "glaður",
+        "kátur"
       ],
       [
-        "raunsær",
-        "jarðbundinn"
+        "kátur",
+        "glaður"
       ],
       [
-        "óhlutdrægur",
-        "hlutlaus"
+        "fallegur",
+        "flottur"
       ],
       [
-        "seigur",
-        "úthaldsgóður"
+        "flottur",
+        "fallegur"
       ],
       [
-        "frumlegur",
-        "nýstárlegur"
+        "vondur",
+        "slæmur"
       ],
       [
-        "gaumgæfilegur",
-        "vandlegur"
+        "slæmur",
+        "vondur"
       ],
       [
-        "samviskusamur",
-        "vandvirkur"
+        "veikur",
+        "lasinn"
       ],
       [
-        "skýrmæltur",
-        "greinargóður"
+        "lasinn",
+        "veikur"
       ],
       [
-        "hlédrægur",
-        "feiminn"
+        "krakki",
+        "barn"
       ],
       [
-        "beinskeyttur",
-        "beinn"
+        "barn",
+        "krakki"
       ],
       [
-        "traustur",
-        "áreiðanlegur"
+        "strákur",
+        "drengur"
       ],
       [
-        "óviss",
-        "ótryggur"
+        "drengur",
+        "strákur"
       ],
       [
-        "margræður",
-        "margslunginn"
+        "stelpa",
+        "stúlka"
       ],
       [
-        "vafasamur",
-        "tortryggilegur"
+        "stúlka",
+        "stelpa"
       ],
       [
-        "hugmyndaríkur",
-        "skapandi"
+        "mamma",
+        "móðir"
       ],
       [
-        "stundvís",
-        "tímanlega mættur"
+        "móðir",
+        "mamma"
       ],
       [
-        "skynsamur",
-        "ráðagóður"
+        "pabbi",
+        "faðir"
       ],
       [
-        "miskunnsamur",
-        "væginn"
+        "faðir",
+        "pabbi"
       ],
       [
-        "ótrauður",
-        "óhræddur"
+        "ganga",
+        "labba"
       ],
       [
-        "þaulvanur",
-        "reyndur"
+        "labba",
+        "ganga"
       ],
       [
-        "ósvikinn",
-        "ekta"
+        "borða",
+        "éta"
       ],
       [
-        "markviss",
-        "stefnufastur"
+        "éta",
+        "borða"
       ],
       [
-        "næmur",
-        "viðkvæmur"
+        "tala",
+        "spjalla"
       ],
       [
-        "ógagnsær",
-        "óljós"
+        "spjalla",
+        "tala"
       ],
       [
-        "áleitinn",
-        "ágengur"
+        "öskra",
+        "hrópa"
       ],
       [
-        "meðvitaður",
-        "vakandi"
+        "hrópa",
+        "öskra"
       ],
       [
-        "tilfinningaríkur",
-        "næmur"
+        "hoppa",
+        "stökkva"
       ],
       [
-        "úrræðagóður",
-        "ráðagóður"
+        "stökkva",
+        "hoppa"
       ],
       [
-        "margorður",
-        "fjölorður"
+        "kaupa",
+        "versla"
       ],
       [
-        "fjarstæður",
-        "óraunsær"
+        "versla",
+        "kaupa"
       ]
     ]
   },
@@ -3573,5 +3573,157 @@
     "tónlist": "n",
     "viðhorf": "r",
     "umræða": "m"
+  },
+  "SYNONYM_CHOICES": {
+    "glaður": [
+      "kátur",
+      "reiður",
+      "veikur"
+    ],
+    "kátur": [
+      "glaður",
+      "reiður",
+      "veikur"
+    ],
+    "fallegur": [
+      "flottur",
+      "ljótur",
+      "veikur"
+    ],
+    "flottur": [
+      "fallegur",
+      "ljótur",
+      "veikur"
+    ],
+    "vondur": [
+      "slæmur",
+      "góður",
+      "fallegur"
+    ],
+    "slæmur": [
+      "vondur",
+      "góður",
+      "fallegur"
+    ],
+    "veikur": [
+      "lasinn",
+      "frískur",
+      "glaður"
+    ],
+    "lasinn": [
+      "veikur",
+      "frískur",
+      "glaður"
+    ],
+    "krakki": [
+      "barn",
+      "borð",
+      "hundur"
+    ],
+    "barn": [
+      "krakki",
+      "borð",
+      "hundur"
+    ],
+    "strákur": [
+      "drengur",
+      "stóll",
+      "bíll"
+    ],
+    "drengur": [
+      "strákur",
+      "stóll",
+      "bíll"
+    ],
+    "stelpa": [
+      "stúlka",
+      "bolti",
+      "fugl"
+    ],
+    "stúlka": [
+      "stelpa",
+      "bolti",
+      "fugl"
+    ],
+    "mamma": [
+      "móðir",
+      "pabbi",
+      "bróðir"
+    ],
+    "móðir": [
+      "mamma",
+      "pabbi",
+      "bróðir"
+    ],
+    "pabbi": [
+      "faðir",
+      "mamma",
+      "systir"
+    ],
+    "faðir": [
+      "pabbi",
+      "mamma",
+      "systir"
+    ],
+    "ganga": [
+      "labba",
+      "sofa",
+      "borða"
+    ],
+    "labba": [
+      "ganga",
+      "sofa",
+      "borða"
+    ],
+    "borða": [
+      "éta",
+      "hlaupa",
+      "sofa"
+    ],
+    "éta": [
+      "borða",
+      "hlaupa",
+      "sofa"
+    ],
+    "tala": [
+      "spjalla",
+      "sofa",
+      "hoppa"
+    ],
+    "spjalla": [
+      "tala",
+      "sofa",
+      "hoppa"
+    ],
+    "öskra": [
+      "hrópa",
+      "sofa",
+      "borða"
+    ],
+    "hrópa": [
+      "öskra",
+      "sofa",
+      "borða"
+    ],
+    "hoppa": [
+      "stökkva",
+      "sofa",
+      "borða"
+    ],
+    "stökkva": [
+      "hoppa",
+      "sofa",
+      "borða"
+    ],
+    "kaupa": [
+      "versla",
+      "sofa",
+      "hlæja"
+    ],
+    "versla": [
+      "kaupa",
+      "sofa",
+      "hlæja"
+    ]
   }
 }

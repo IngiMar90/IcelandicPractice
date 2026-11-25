@@ -14,6 +14,7 @@ Myndrænt æfingaforrit fyrir stafsetningu, orðaforða og málfræði.
 - Framvinda er aðskilin eftir nemendum og vistast í sama vafra á sama tæki. Æfing án nafns opnar ekki næstu stig.
 - Eldri lotur, met og markmið varðveitast. Þau reiknast ekki afturvirkt inn í nýju færniskilyrðin. Stigaframvinda vistast í `mastery_v1` innan fyrirliggjandi gagnasafns.
 - Kennarasvæði sýnir stigaframvindu allra 12 verkefnanna ásamt fyrri niðurstöðum, markmiðum og CSV-útflutningi.
+- Samheitaæfingar nota 15 algeng hversdagspör í báðar áttir (30 spurningar), með sérstaklega völdum einföldum röngum svarmöguleikum. Orðin eru jafn aðgengileg í öllum þremur orðabönkunum.
 - Leiðbeiningar, sýnidæmi og valfrjáls íslenskur upplestur þegar rödd er tiltæk í vafranum.
 - Virkar án nets eftir fyrstu skyndiminnisvistun. Myndir og letur þurfa engar ytri þjónustur.
 

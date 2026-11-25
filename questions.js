@@ -43,6 +43,7 @@ export function buildQuestionBank(data,exercise,level) {
   if(vocab) {
     const items=data[vocab][level];
     return items.map(([word,answer])=>{
+      if(exercise==='samheiti'&&data.SYNONYM_CHOICES?.[word])return question('Hvaða orð merkir næstum það sama?',word,shuffle(data.SYNONYM_CHOICES[word]),answer,answer,`${word} og ${answer} hafa svipaða merkingu.`);
       if(exercise==='orð og skýring')return question('Hvaða orð passar við skýringuna?',answer,choicesFor(word,items.map(x=>x[0]),data),word,word,`${word}: ${answer}.`);
       return question(exercise==='samheiti'?'Hvaða orð hefur svipaða merkingu?':'Hvaða orð hefur andstæða merkingu?',word,choicesFor(answer,items.map(x=>x[1]),data,word),answer,answer,`${word} ${exercise==='samheiti'?'≈':'↔'} ${answer}`);
     });

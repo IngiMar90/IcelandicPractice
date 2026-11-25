@@ -1,5 +1,5 @@
 const CACHE_PREFIX='islenska-aefing-pwa-';
-const CACHE_NAME=CACHE_PREFIX+'v3-stages-20261125';
+const CACHE_NAME=CACHE_PREFIX+'v4-everyday-synonyms-20261125';
 const ASSETS=['./','./index.html','./styles.css','./app.js','./exercises.js','./questions.js','./progression.js','./data.json','./manifest.json','./icons/icon-192.png','./icons/icon-512.png'];
 self.addEventListener('install',event=>{
   event.waitUntil(caches.open(CACHE_NAME).then(cache=>cache.addAll(ASSETS)).then(()=>self.skipWaiting()));
